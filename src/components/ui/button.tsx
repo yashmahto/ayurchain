@@ -15,6 +15,11 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Botanical theme variants
+        botanical: "bg-gradient-botanical text-primary-foreground hover:opacity-90 shadow-botanical hover:shadow-trust transition-all duration-300",
+        earth: "bg-gradient-earth text-foreground hover:opacity-90 shadow-botanical border border-herb-primary/20 hover:border-herb-primary/40 transition-all duration-300",
+        trust: "bg-gradient-trust text-primary-foreground hover:opacity-90 shadow-trust transition-all duration-300",
+        herb: "bg-herb-primary text-primary-foreground hover:bg-herb-primary/90 shadow-botanical transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

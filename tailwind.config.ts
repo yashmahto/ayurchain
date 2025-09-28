@@ -47,6 +47,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Botanical theme colors
+        "herb-primary": "hsl(var(--herb-primary))",
+        "herb-secondary": "hsl(var(--herb-secondary))",
+        "earth-tone": "hsl(var(--earth-tone))",
+        "trust-blue": "hsl(var(--trust-blue))",
+        "success-green": "hsl(var(--success-green))",
+        "warning-amber": "hsl(var(--warning-amber))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -80,10 +87,34 @@ export default {
             height: "0",
           },
         },
+        "float": {
+          "0%, 100%": {
+            transform: "translateY(0px)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-slow": "pulse 3s ease-in-out infinite",
+        "float": "float 3s ease-in-out infinite",
+      },
+      backgroundImage: {
+        'gradient-botanical': 'var(--gradient-botanical)',
+        'gradient-earth': 'var(--gradient-earth)',
+        'gradient-trust': 'var(--gradient-trust)',
+      },
+      boxShadow: {
+        'botanical': 'var(--shadow-botanical)',
+        'trust': 'var(--shadow-trust)',
+        'elevation': 'var(--shadow-elevation)',
+      },
+      transitionTimingFunction: {
+        'smooth': 'var(--transition-smooth)',
+        'spring': 'var(--transition-spring)',
       },
     },
   },

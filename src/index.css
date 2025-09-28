@@ -2,39 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Ayurvedic Botanical Traceability System - Design Tokens */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core botanical color palette */
+    --background: 45 20% 97%;
+    --foreground: 140 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 140 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 140 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Deep forest green for trust and nature */
+    --primary: 140 60% 25%;
+    --primary-foreground: 0 0% 98%;
+    
+    /* Secondary: Warm earth tones */
+    --secondary: 35 25% 88%;
+    --secondary-foreground: 140 15% 15%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 45 15% 92%;
+    --muted-foreground: 140 10% 45%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent: Vibrant botanical green */
+    --accent: 120 40% 82%;
+    --accent-foreground: 140 60% 20%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 45 15% 85%;
+    --input: 45 15% 90%;
+    --ring: 140 60% 25%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Botanical-specific tokens */
+    --herb-primary: 95 45% 55%;
+    --herb-secondary: 160 35% 65%;
+    --earth-tone: 30 25% 75%;
+    --trust-blue: 210 70% 45%;
+    --success-green: 120 60% 50%;
+    --warning-amber: 45 85% 60%;
+
+    /* Gradients for botanical feel */
+    --gradient-botanical: linear-gradient(135deg, hsl(var(--herb-primary)), hsl(var(--herb-secondary)));
+    --gradient-earth: linear-gradient(135deg, hsl(var(--earth-tone)), hsl(var(--secondary)));
+    --gradient-trust: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--trust-blue)));
+    
+    /* Shadows with botanical theme */
+    --shadow-botanical: 0 4px 20px -2px hsl(var(--herb-primary) / 0.15);
+    --shadow-trust: 0 8px 32px -4px hsl(var(--primary) / 0.2);
+    --shadow-elevation: 0 10px 40px -8px hsl(var(--foreground) / 0.1);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --radius: 0.5rem;
 
