@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link, useLocation } from "react-router-dom";
 import { 
   Leaf, 
   Menu, 
@@ -14,22 +15,23 @@ import {
 import { useState } from "react";
 
 const navigationItems = [
-  { name: "Collect", href: "#collect", icon: MapPin },
-  { name: "Process", href: "#process", icon: Package },
-  { name: "Test", href: "#test", icon: Microscope },
-  { name: "Scan", href: "#scan", icon: QrCode },
-  { name: "Dashboard", href: "#dashboard", icon: Shield },
+  { name: "Collect", href: "/collect", icon: MapPin },
+  { name: "Process", href: "/process", icon: Package },
+  { name: "Test", href: "/test", icon: Microscope },
+  { name: "Scan", href: "/scan", icon: QrCode },
+  { name: "Dashboard", href: "/dashboard", icon: Shield },
 ];
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-herb-primary/20 shadow-botanical">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="p-2 bg-gradient-botanical rounded-lg shadow-botanical">
               <Leaf className="h-6 w-6 text-primary-foreground" />
             </div>
@@ -39,7 +41,7 @@ export const Navigation = () => {
                 Blockchain Verified
               </Badge>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
@@ -48,10 +50,15 @@ export const Navigation = () => {
                 key={item.name}
                 variant="ghost"
                 size="sm"
-                className="text-muted-foreground hover:text-foreground hover:bg-herb-primary/10"
+                asChild
+                className={`text-muted-foreground hover:text-foreground hover:bg-herb-primary/10 ${
+                  location.pathname === item.href ? 'text-foreground bg-herb-primary/10' : ''
+                }`}
               >
-                <item.icon className="h-4 w-4 mr-2" />
-                {item.name}
+                <Link to={item.href}>
+                  <item.icon className="h-4 w-4 mr-2" />
+                  {item.name}
+                </Link>
               </Button>
             ))}
           </div>
@@ -83,11 +90,16 @@ export const Navigation = () => {
                 <Button
                   key={item.name}
                   variant="ghost"
-                  className="justify-start text-muted-foreground hover:text-foreground hover:bg-herb-primary/10"
+                  asChild
+                  className={`justify-start text-muted-foreground hover:text-foreground hover:bg-herb-primary/10 ${
+                    location.pathname === item.href ? 'text-foreground bg-herb-primary/10' : ''
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <item.icon className="h-4 w-4 mr-2" />
-                  {item.name}
+                  <Link to={item.href}>
+                    <item.icon className="h-4 w-4 mr-2" />
+                    {item.name}
+                  </Link>
                 </Button>
               ))}
               <div className="pt-2">
