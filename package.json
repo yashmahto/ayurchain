@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "lint": "eslint .",
+  "lint": "eslint .",
+  "check:quality": "node ./scripts/check_code_quality.cjs",
     "preview": "vite preview"
   },
   "dependencies": {
