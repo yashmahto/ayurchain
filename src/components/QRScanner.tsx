@@ -79,11 +79,20 @@ const mockProvenanceData = {
 export const QRScanner = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleScan = () => {
+    setError(null);
     setIsScanning(true);
-    // Simulate scanning delay
+    // Simulate scanning delay and possible failure
     setTimeout(() => {
+      const failed = Math.random() < 0.15;
+      if (failed) {
+        setIsScanning(false);
+        setError("Failed to retrieve provenance data. Please try again.");
+        return;
+      }
+
       setIsScanning(false);
       setShowResults(true);
     }, 2000);
@@ -204,7 +213,7 @@ export const QRScanner = () => {
           </p>
         </div>
 
-        {!showResults ? (
+  {!showResults ? (
           <div className="max-w-md mx-auto">
             <Card className="p-8 text-center shadow-elevation">
               <div className="mb-6">
@@ -222,25 +231,47 @@ export const QRScanner = () => {
                 </p>
               </div>
               
-              <Button 
-                variant="botanical" 
-                size="lg" 
-                onClick={handleScan}
-                disabled={isScanning}
-                className="w-full shadow-botanical"
-              >
-                {isScanning ? (
-                  <>
-                    <div className="animate-spin mr-2 h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full" />
-                    Scanning...
-                  </>
-                ) : (
-                  <>
-                    <QrCode className="mr-2 h-4 w-4" />
-                    Demo Scan QR Code
-                  </>
-                )}
-              </Button>
+              {error ? (
+                <div className="space-y-3">
+                  <div className="rounded-md bg-destructive/10 border border-destructive p-4 text-sm text-destructive">{error}</div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" onClick={() => { setError(null); handleScan(); }}>Retry</Button>
+                    <Button variant="botanical" size="lg" onClick={handleScan} disabled={isScanning} className="flex-1">
+                      {isScanning ? (
+                        <>
+                          <div className="animate-spin mr-2 h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full" />
+                          Scanning...
+                        </>
+                      ) : (
+                        <>
+                          <QrCode className="mr-2 h-4 w-4" />
+                          Demo Scan QR Code
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <Button 
+                  variant="botanical" 
+                  size="lg" 
+                  onClick={handleScan}
+                  disabled={isScanning}
+                  className="w-full shadow-botanical"
+                >
+                  {isScanning ? (
+                    <>
+                      <div className="animate-spin mr-2 h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full" />
+                      Scanning...
+                    </>
+                  ) : (
+                    <>
+                      <QrCode className="mr-2 h-4 w-4" />
+                      Demo Scan QR Code
+                    </>
+                  )}
+                </Button>
+              )}
             </Card>
           </div>
         ) : (
