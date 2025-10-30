@@ -41,10 +41,20 @@ const mockCollectionData = {
 export default function Collect() {
   const [isCollecting, setIsCollecting] = useState(false);
   const [collectionComplete, setCollectionComplete] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleStartCollection = () => {
+    setError(null);
     setIsCollecting(true);
+    // Simulate API call with 80% success rate
     setTimeout(() => {
+      const failed = Math.random() < 0.2;
+      if (failed) {
+        setIsCollecting(false);
+        setError("Failed to record collection event. Network or blockchain error.");
+        return;
+      }
+
       setIsCollecting(false);
       setCollectionComplete(true);
     }, 3000);
@@ -159,30 +169,61 @@ export default function Collect() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-border">
-                <Button 
-                  variant={collectionComplete ? "herb" : "botanical"} 
-                  size="lg" 
-                  className="w-full shadow-botanical"
-                  onClick={handleStartCollection}
-                  disabled={isCollecting}
-                >
-                  {isCollecting ? (
-                    <>
-                      <div className="animate-spin mr-2 h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full" />
-                      Recording to Blockchain...
-                    </>
-                  ) : collectionComplete ? (
-                    <>
-                      <CheckCircle className="mr-2 h-4 w-4" />
-                      Collection Recorded Successfully
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="mr-2 h-4 w-4" />
-                      Record Collection Event
-                    </>
-                  )}
-                </Button>
+                {error ? (
+                  <div className="space-y-3">
+                    <div className="rounded-md bg-destructive/10 border border-destructive p-4 text-sm text-destructive">
+                      {error}
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline" onClick={() => { setError(null); handleStartCollection(); }}>
+                        Retry
+                      </Button>
+                      <Button variant={collectionComplete ? "herb" : "botanical"} size="lg" className="flex-1" onClick={handleStartCollection} disabled={isCollecting}>
+                        {isCollecting ? (
+                          <>
+                            <div className="animate-spin mr-2 h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full" />
+                            Recording to Blockchain...
+                          </>
+                        ) : collectionComplete ? (
+                          <>
+                            <CheckCircle className="mr-2 h-4 w-4" />
+                            Collection Recorded Successfully
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="mr-2 h-4 w-4" />
+                            Record Collection Event
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <Button 
+                    variant={collectionComplete ? "herb" : "botanical"} 
+                    size="lg" 
+                    className="w-full shadow-botanical"
+                    onClick={handleStartCollection}
+                    disabled={isCollecting}
+                  >
+                    {isCollecting ? (
+                      <>
+                        <div className="animate-spin mr-2 h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full" />
+                        Recording to Blockchain...
+                      </>
+                    ) : collectionComplete ? (
+                      <>
+                        <CheckCircle className="mr-2 h-4 w-4" />
+                        Collection Recorded Successfully
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="mr-2 h-4 w-4" />
+                        Record Collection Event
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
             </Card>
 
